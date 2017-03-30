@@ -1,20 +1,31 @@
 <template>
 
-    <div id="app">
-        <sample
-            :rows="rows"
-            :fields="fields"
-            @selected="select"
-        ></sample>
-        <div class="card">
-        <div class="card-header card-inverse card-primary">Featured</div>
-        <div class="card-block">
-        <sample2
-            :row="selectedRow"
-            :fields="fields"
-            @update="onUpdate"
-        ></sample2>
-        </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header card-inverse card-primary">Names</div>
+                    <div class="card-block">
+                        <sarp-datatable
+                            :rows="rows"
+                            :fields="fields"
+                            @selected="select"
+                        ></sarp-datatable>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+            <div class="card">
+                <div class="card-header card-inverse card-primary">Edit</div>
+                <div class="card-block">
+                    <sarp-form
+                        :row="selectedRow"
+                        :fields="fields"
+                        @update="onUpdate"
+                    ></sarp-form>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
 
@@ -22,12 +33,12 @@
 
 <script>
 
-    import Sample from './components/Sample.vue'
-    import Sample2 from './components/Sample2.vue'
+    import SarpDatatable from './components/SarpDatatable.vue'
+    import SarpForm from './components/SarpForm.vue'
 
     export default {
         name: 'App',
-        components: { Sample, Sample2 },
+        components: { SarpDatatable, SarpForm },
         data: () => ({ rows: [], fields: ['name', 'age'] }),
         mounted() {
             this.rows.push({id: 1, name: 'John', age: 100})

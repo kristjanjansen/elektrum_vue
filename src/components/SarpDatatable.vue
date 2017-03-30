@@ -15,6 +15,7 @@
             v-for="row in orderedRows"
             @click="$emit('selected', row.id)"
             :class="{'table-warning': row.selected}"
+            style="cursor: pointer"
         >
             <td
                 v-for="field in fields"
