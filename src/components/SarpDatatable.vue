@@ -1,5 +1,4 @@
 <template>
-    
     <table class="table table-bordered table-responsive">
 
         <thead>
@@ -12,7 +11,7 @@
         </thead>
         <tbody>
         <tr
-            v-for="row in orderedRows"
+            v-for="row in orderedAndFilteredRows"
             @click="$emit('selected', row.id)"
             :class="{'table-warning': row.selected}"
             style="cursor: pointer"
@@ -35,16 +34,17 @@
     export default {
         props: {
             fields: { default: [] },
-            rows: { default: [] }
+            rows: { default: [] },
+            search: { default: '' }
         },
         data: () => ({ orderKey: 'a', orderAsc: true }),
         computed: {
-            orderedRows() {
+            orderedAndFilteredRows() {
                 return orderBy(
                     this.rows,
                     this.orderKey,
                     this.orderAsc ? 'asc' : 'desc'
-                )
+                ).filter(row => row.name.includes(this.search))
             }
         },
         methods: {

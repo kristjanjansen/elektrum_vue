@@ -6,7 +6,11 @@
                 <div class="card">
                     <div class="card-header card-inverse card-primary">Names</div>
                     <div class="card-block">
+                        <input type="text" class="form-control" v-model="search">
+                    </div>
+                    <div class="card-block">
                         <sarp-datatable
+                            :search="search"
                             :rows="rows"
                             :fields="fields"
                             @selected="select"
@@ -39,11 +43,11 @@
     export default {
         name: 'App',
         components: { SarpDatatable, SarpForm },
-        data: () => ({ rows: [], fields: ['name', 'age'] }),
+        data: () => ({ rows: [], fields: ['name', 'age'], search: '' }),
         mounted() {
-            this.rows.push({id: 1, name: 'John', age: 100})
-            this.rows.push({id: 2, name: 'Bruce', age: 70})
-            this.rows.push({id: 3, name: 'Jan-Claude', age: 60})
+            this.rows.push({id: 1, name: 'John Wayne', age: 100})
+            this.rows.push({id: 2, name: 'Bruce Lee', age: 70})
+            this.rows.push({id: 3, name: 'Jean-Claude van Damme', age: 60})
         },
         computed: {
             selectedRow() {
