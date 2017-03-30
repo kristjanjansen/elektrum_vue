@@ -2,9 +2,12 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-8">
+
                 <div class="card">
-                    <div class="card-header card-inverse card-primary">Names</div>
+                    <div class="card-header card-inverse card-primary">
+                        Clients
+                    </div>
                     <div class="card-block">
                         <input type="text" class="form-control" v-model="search">
                     </div>
@@ -17,18 +20,23 @@
                         ></sarp-datatable>
                     </div>
                 </div>
+
             </div>
-            <div class="col-6">
-            <div class="card">
-                <div class="card-header card-inverse card-primary">Edit</div>
-                <div class="card-block">
-                    <sarp-form
-                        :row="selectedRow"
-                        :fields="fields"
-                        @update="onUpdate"
-                    ></sarp-form>
+            <div class="col-4">
+
+                <div class="card">
+                    <div class="card-header card-inverse card-primary">
+                        Edit
+                    </div>
+                    <div class="card-block">
+                        <sarp-form
+                            :row="selectedRow"
+                            :fields="fields"
+                            @update="onUpdate"
+                        ></sarp-form>
+                    </div>
                 </div>
-            </div>
+
             </div>
         </div>
     </div>
@@ -37,17 +45,28 @@
 
 <script>
 
+    import faker from 'faker'
+
     import SarpDatatable from './components/SarpDatatable.vue'
     import SarpForm from './components/SarpForm.vue'
 
     export default {
         name: 'App',
         components: { SarpDatatable, SarpForm },
-        data: () => ({ rows: [], fields: ['name', 'age'], search: '' }),
+        data: () => ({
+            rows: [],
+            fields: ['name', 'company', 'city'],
+            search: ''
+        }),
         mounted() {
-            this.rows.push({id: 1, name: 'John Wayne', age: 100})
-            this.rows.push({id: 2, name: 'Bruce Lee', age: 70})
-            this.rows.push({id: 3, name: 'Jean-Claude van Damme', age: 60})
+            for (var i = 0; i < 50; i++) {
+                this.rows.push({
+                    id: i,
+                    name: faker.name.findName(),
+                    company: faker.company.companyName(),
+                    city: faker.address.city()
+                })
+            }
         },
         computed: {
             selectedRow() {
