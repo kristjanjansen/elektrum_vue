@@ -12,6 +12,7 @@
                 @input="updateData"
             >
         </div>
+        <button class="btn btn-primary">Add new</button>
         
     </div>
 

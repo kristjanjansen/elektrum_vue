@@ -1,6 +1,12 @@
 <template>
 
-    <div class="container">
+    <div>
+    
+    <nav class="navbar fixed-top navbar-inverse bg-inverse">
+      <a class="navbar-brand" href="#">Full width</a>
+    </nav>
+
+    <div class="container-fluid">
         <div class="row">
             <div class="col-8">
 
@@ -39,6 +45,8 @@
 
             </div>
         </div>
+    </div>
+
     </div>
 
 </template>
@@ -93,12 +101,16 @@
 
 </script>
 
-<style>
+<style lang="sass">
 
     body {
-        font-family: sans-serif;
-        margin: 0;
-        padding: 2rem;
+        padding-top: 5em;
     }
+
+    @import "~bootstrap/scss/variables";
+    $enable-rounded: false;
+    $enable-shadows: true;
+    $font-family-base: 'Open Sans', sans-serif;
+    @import "~bootstrap/scss/bootstrap";
 
 </style>
