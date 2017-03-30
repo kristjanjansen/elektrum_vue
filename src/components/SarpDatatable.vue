@@ -7,7 +7,7 @@
                 v-for="field in fields"
                 @click="order(field)"
             >
-                {{ field }}
+                {{ field }} {{ orderIcon(field) }}
             </th>
         </thead>
         <tbody>
@@ -52,6 +52,9 @@
                 console.log(field)
                 this.orderKey = field
                 this.orderAsc = !this.orderAsc
+            },
+            orderIcon(field) {
+                return (this.orderKey == field) ? (this.orderAsc ? '↓' : '↑') : ''
             }
         }
     }
