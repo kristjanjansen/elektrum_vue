@@ -43,7 +43,7 @@
             orderedAndFilteredRows() {
                 return orderBy(
                     this.rows,
-                    this.orderKey,
+                    this.orderField,
                     this.orderAsc ? 'asc' : 'desc'
                 )
                 .filter(row => row.name.includes(this.search))
