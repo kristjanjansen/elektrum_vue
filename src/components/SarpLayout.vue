@@ -35,5 +35,19 @@
 
 </script>
 
-<style>
+<style lang="sass">
+
+    $card-spacer-x: 1rem;
+    $card-spacer-y: .5rem;
+    $enable-rounded: false;
+    $enable-shadows: true;
+    $font-family-base: 'Open Sans', sans-serif;
+    $spacer-y: .5rem;
+
+    @import "~bootstrap/scss/bootstrap";
+
+    body {
+        padding-top: 5em;
+    }
+
 </style>

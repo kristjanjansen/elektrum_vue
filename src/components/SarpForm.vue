@@ -1,18 +1,15 @@
 <template>
     
     <div>
-        <div class="form-group"
-            v-for="field in fields"
-        >
+        <div class="form-group" v-for="field in fields">
             <label for="field">{{ field }}</label>
             <input
                 :id="field"
                 class="form-control"
                 v-model="data[field]"
-                @input="updateData"
+                @input="onInput"
             >
         </div>
-        
     </div>
 
 </template>
@@ -33,13 +30,10 @@
             }
         },
         methods: {
-            updateData() {
-                this.$emit('update', this.data)
+            onInput() {
+                this.$emit('updatedRow', this.data)
             }
         },
     }
 
 </script>
-
-<style>
-</style>

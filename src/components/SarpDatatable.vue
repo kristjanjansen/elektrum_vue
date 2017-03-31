@@ -1,10 +1,10 @@
 <template>
+    
     <table class="table table-bordered table-responsive">
-
         <thead>
             <th
                 v-for="field in fields"
-                @click="order(field)"
+                @click="orderBy(field)"
                 style="cursor: pointer"
             >
                 {{ field }} {{ orderIcon(field) }}
@@ -13,7 +13,7 @@
         <tbody>
         <tr
             v-for="row in orderedAndFilteredRows"
-            @click="$emit('selected', row.id)"
+            @click="$emit('selectedRowId', row.id)"
             :class="{'table-warning': row.selected}"
             style="cursor: pointer"
         >
@@ -38,29 +38,27 @@
             rows: { default: [] },
             search: { default: '' }
         },
-        data: () => ({ orderKey: 'a', orderAsc: true }),
+        data: () => ({ orderField: '', orderAsc: true }),
         computed: {
             orderedAndFilteredRows() {
                 return orderBy(
                     this.rows,
                     this.orderKey,
                     this.orderAsc ? 'asc' : 'desc'
-                ).filter(row => row.name.includes(this.search))
+                )
+                .filter(row => row.name.includes(this.search))
             }
         },
         methods: {
-            order(field) {
-                console.log(field)
-                this.orderKey = field
+            orderBy(field) {
+                this.orderField = field
                 this.orderAsc = !this.orderAsc
             },
             orderIcon(field) {
-                return (this.orderKey == field) ? (this.orderAsc ? '↓' : '↑') : ''
+                return (this.orderField == field)
+                    ? (this.orderAsc ? '↓' : '↑') : ''
             }
         }
     }
 
 </script>
-
-<style>
-</style>
