@@ -5,6 +5,7 @@
             <th
                 v-for="field in fields"
                 @click="order(field)"
+                style="cursor: pointer"
             >
                 {{ field }} {{ orderIcon(field) }}
             </th>

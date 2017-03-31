@@ -3,7 +3,7 @@
     <div>
     
     <nav class="navbar fixed-top navbar-inverse bg-inverse">
-      <a class="navbar-brand" href="#">Full width</a>
+      <a class="navbar-brand" href="#">Vue component demo</a>
     </nav>
 
     <div class="container-fluid">
@@ -12,17 +12,17 @@
 
                 <div class="card">
                     <div class="card-header card-inverse card-primary">
-                        Clients
+                        Clients (SarpDatatable.vue)
                     </div>
-                    <div class="card-block">
-                        <input type="text" class="form-control" v-model="search">
-                    </div>
-                    <div class="card-block">
+                        <div class="card-block">
+                        <div class="form-group">
+                            <input type="text" class="form-control" v-model="search" placeholder="Search">
+                        </div>
                         <sarp-datatable
                             :search="search"
                             :rows="rows"
                             :fields="fields"
-                            @selected="select"
+                            @selected="onSelect"
                         ></sarp-datatable>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
 
                 <div class="card">
                     <div class="card-header card-inverse card-primary">
-                        Edit
+                        Edit (SarpForm.vue)
                     </div>
                     <div class="card-block">
                         <sarp-form
@@ -53,6 +53,7 @@
 
 <script>
 
+    // Utlility to generate dummy data for testing
     import faker from 'faker'
 
     import SarpDatatable from './components/SarpDatatable.vue'
@@ -62,27 +63,27 @@
         name: 'App',
         components: { SarpDatatable, SarpForm },
         data: () => ({
+            // On init the data collection is empty, we fill it later
             rows: [],
-            fields: ['name', 'company', 'city'],
+            // Collection row keys we want to display
+            fields: ['name', 'company', 'city', 'zip'],
+            // On init the search string is empty
             search: ''
         }),
         mounted() {
+            // Fill the table with fake data
             for (var i = 0; i < 50; i++) {
                 this.rows.push({
                     id: i,
                     name: faker.name.findName(),
                     company: faker.company.companyName(),
-                    city: faker.address.city()
+                    city: faker.address.city(),
+                    zip: faker.address.zipCode()
                 })
             }
         },
-        computed: {
-            selectedRow() {
-                return this.rows.find(row => row.selected)
-            }
-        },
         methods: {
-            select(rowId) {
+            onSelect(rowId) {
                 this.rows = this.rows.map(row => {
                     row.selected = row.id === rowId
                     return row
@@ -95,6 +96,12 @@
                     }
                     return row
                 })
+            }
+        },
+        computed: {
+            // Find the collection row that is selected
+            selectedRow() {
+                return this.rows.find(row => row.selected)
             }
         }
     }
@@ -110,6 +117,9 @@
     @import "~bootstrap/scss/variables";
     $enable-rounded: false;
     $enable-shadows: true;
+    $spacer-y: .5rem;
+    $card-spacer-x: 1rem;
+    $card-spacer-y: .5rem;
     $font-family-base: 'Open Sans', sans-serif;
     @import "~bootstrap/scss/bootstrap";
 
