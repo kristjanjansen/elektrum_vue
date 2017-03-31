@@ -1,53 +1,44 @@
 <template>
 
-    <div>
+    <sarp-layout title="Vue demo">
     
-    <nav class="navbar fixed-top navbar-inverse bg-inverse">
-      <a class="navbar-brand" href="#">Vue component demo</a>
-    </nav>
+        <div slot="left">
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-8">
-
-                <div class="card">
-                    <div class="card-header card-inverse card-primary">
-                        Clients (SarpDatatable.vue)
-                    </div>
-                        <div class="card-block">
-                        <div class="form-group">
-                            <input type="text" class="form-control" v-model="search" placeholder="Search">
-                        </div>
-                        <sarp-datatable
-                            :search="search"
-                            :rows="rows"
-                            :fields="fields"
-                            @selected="onSelect"
-                        ></sarp-datatable>
-                    </div>
+            <sarp-panel title="Data">
+                
+                <div class="form-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        v-model="search"
+                        placeholder="Search"
+                    >
                 </div>
+                
+                <sarp-datatable
+                    :search="search"
+                    :rows="rows"
+                    :fields="fields"
+                    @selected="onSelect"
+                ></sarp-datatable>
 
-            </div>
-            <div class="col-4">
+            </sarp-panel>
 
-                <div class="card">
-                    <div class="card-header card-inverse card-primary">
-                        Edit (SarpForm.vue)
-                    </div>
-                    <div class="card-block">
-                        <sarp-form
-                            :row="selectedRow"
-                            :fields="fields"
-                            @update="onUpdate"
-                        ></sarp-form>
-                    </div>
-                </div>
-
-            </div>
         </div>
-    </div>
 
-    </div>
+
+            <sarp-panel slot="right" title="Edit">
+                
+                <sarp-form
+                    :row="selectedRow"
+                    :fields="fields"
+                    @update="onUpdate"
+                ></sarp-form>
+            
+            </sarp-panel>
+
+
+    </sarp-layout>
 
 </template>
 
@@ -58,10 +49,12 @@
 
     import SarpDatatable from './components/SarpDatatable.vue'
     import SarpForm from './components/SarpForm.vue'
+    import SarpPanel from './components/SarpPanel.vue'
+    import SarpLayout from './components/SarpLayout.vue'
 
     export default {
         name: 'App',
-        components: { SarpDatatable, SarpForm },
+        components: { SarpDatatable, SarpForm, SarpPanel, SarpLayout },
         data: () => ({
             // On init the data collection is empty, we fill it later
             rows: [],
