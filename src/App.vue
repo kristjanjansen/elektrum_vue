@@ -7,7 +7,7 @@
             <div class="form-group">
                 <input
                     type="text"
-                    class="form-control"
+                    class="form-control search"
                     v-model="search"
                     placeholder="Search"
                 >
